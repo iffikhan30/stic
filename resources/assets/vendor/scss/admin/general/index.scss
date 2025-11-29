@@ -1,0 +1,828 @@
+* {
+  .flatpickr-calendar svg {
+      margin-top: 0.4rem !important;
+  }
+  #DataTables_Table_0_wrapper .row.mx-2 {
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+
+  #DataTables_Table_0_wrapper .row.mx-2 .col-md-2,
+  #DataTables_Table_0_wrapper .row.mx-2 .col-md-10 {
+    padding: 0px !important;
+  }
+
+  #DataTables_Table_0_wrapper .row.mx-2 .col-md-6 .dt-paging {
+    float: right;
+  }
+  .brand-filter-form {
+    display: grid;
+    grid-template: 'sOc sMake sModel sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sMake sModel'
+        'sStatus buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sMake sModel'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sMake sModel'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sMake'
+        'sModel'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sMake {
+      grid-area: sMake;
+    }
+    #sModel {
+      grid-area: sModel;
+    }
+    #sComp {
+      grid-area: sComp;
+    }
+    #sCname {
+      grid-area: sCname;
+    }
+    #sMake {
+      grid-area: sMake;
+    }
+    #sReg {
+      grid-area: sReg;
+    }
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+  .media-filter-form {
+    display: grid;
+    grid-template: 'sOc sTable sTitle sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sTable sTitle sStatus'
+        'buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sTable sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sTable sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sTable'
+        'sTitle'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTable {
+      grid-area: sTable;
+    }
+    #sTitle {
+      grid-area: sTitle;
+    }
+    #sComp {
+      grid-area: sComp;
+    }
+    #sCname {
+      grid-area: sCname;
+    }
+    #sMake {
+      grid-area: sMake;
+    }
+    #sReg {
+      grid-area: sReg;
+    }
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+  .country-column-hide tr > th:nth-child(3), .country-column-hide tr > td:nth-child(3) {
+      // display: none;
+  }
+  .general-country-filter-form {
+    display: grid;
+    grid-template: 'sTitle sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sTitle'
+        'sStatus buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sTitle'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .general-filter-form {
+    display: grid;
+    grid-template: 'sOc sTitle sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sTitle'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .color-filter-form {
+    display: grid;
+    grid-template: 'sOc sTitle sCode sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sTitle'
+        'sCode'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+
+    #sCode {
+      grid-area: sCode;
+    }
+
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .rentalcar-filter-form {
+    display: grid;
+    grid-template: 'sId sTitle sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sId sTitle sStatus'
+        ' buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sTitle'
+        'sCode'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+
+    #sCode {
+      grid-area: sCode;
+    }
+
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .order-filter-form {
+    display: grid;
+    grid-template: 'sOc sTitle sDateRange sStatus sPaymentStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sTitle sDateRange'
+        'sStatus buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sTitle'
+        'sCode'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+
+    #sCode {
+      grid-area: sCode;
+    }
+
+    #sPaymentStatus {
+      grid-area: sPaymentStatus;
+    }
+
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .carattribute-filter-form {
+    display: grid;
+    grid-template: 'sOc sTitle sType sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sTitle'
+        'sCode'
+        'sType'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+
+    #sCode {
+      grid-area: sCode;
+    }
+
+    #sType {
+      grid-area: sType;
+    }
+
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .webform-filter-form {
+    display: grid;
+    grid-template: 'sOc sTitle sEmail sPhone sStatus sDateRange buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sTitle sEmail sPhone sStatus sDateRange'
+        'buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sTitle'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+
+    #sEmail {
+      grid-area: sEmail;
+    }
+
+    #sPhone {
+      grid-area: sPhone;
+    }
+
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    #sDateRange {
+      grid-area: sDateRange;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .webroadform-filter-form {
+    display: grid;
+    grid-template: 'sOc sTitle sEmail sPhone sRefno sStatus sDateRange buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sTitle sEmail sPhone sRefno sStatus sDateRange'
+        'buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sTitle'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+
+    #sEmail {
+      grid-area: sEmail;
+    }
+
+    #sPhone {
+      grid-area: sPhone;
+    }
+
+    #sRefno {
+      grid-area: sRefno;
+    }
+
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    #sDateRange {
+      grid-area: sDateRange;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .webform-newsletter-filter-form {
+    display: grid;
+    grid-template: 'sOc sEmail sDateRange sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sEmail sDateRange sStatus'
+        'buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sEmail'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sEmail'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sEmail'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+
+    #sEmail {
+      grid-area: sEmail;
+    }
+
+    #sPhone {
+      grid-area: sPhone;
+    }
+
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+
+  .coupon-filter-form {
+    display: grid;
+    grid-template: 'sOc sTitle sCode sStatus buttonContainer';
+    gap: 6px;
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+    background: #eee;
+
+    @media (max-width: 1400px) {
+      grid-template:
+        'sOc sTitle sCode sStatus'
+        'buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 992px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus buttonContainer';
+    }
+
+    @media (max-width: 768px) {
+      grid-template:
+        'sOc sTitle'
+        'sStatus'
+        'buttonContainer buttonContainer buttonContainer';
+    }
+
+    @media (max-width: 576px) {
+      grid-template:
+        'sOc'
+        'sTitle'
+        'sStatus'
+        'buttonContainer';
+    }
+
+    #sTitle {
+      grid-area: sTitle;
+    }
+
+    #sEmail {
+      grid-area: sEmail;
+    }
+
+    #sPhone {
+      grid-area: sPhone;
+    }
+
+    #sCode {
+      grid-area: sCode;
+    }
+
+    #sStatus {
+      grid-area: sStatus;
+    }
+
+    .button-container {
+      grid-area: buttonContainer;
+      text-align: right;
+
+      @media (max-width: 576px) {
+        display: grid;
+        gap: 4px;
+        grid-template-columns: auto 35px;
+      }
+    }
+  }
+  .custom-table-style.table > :not(caption) > * > * {
+    padding: 0.2rem 0.5rem !important;
+    font-size: 13px;
+  }
+
+  .daterangepicker .calendar-table th.prev span,
+  .daterangepicker .calendar-table th.next span,
+  .daterangepicker .calendar-table th.prev:hover span,
+  .daterangepicker .calendar-table th.next:hover span {
+    margin-top: 0.9rem;
+  }
+}
