@@ -110,39 +110,6 @@
     });
   }
 
-  //GET STATES BY COUNTRY ID
-  function getStatesByCountryID() {
-    try {
-      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      var general_id = $('#country_id').val();
-      $.ajax({
-        type: 'POST',
-        url: `${baseUrl}dashboard/getstatesbycountryid`,
-        headers: { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': csrfToken },
-        data: { country_id: general_id },
-        success: function (res) {
-          let pickup_id = $('#state_id');
-          pickup_id.empty();
-          pickup_id.append('<option value="">Select State</option>');
-          res.forEach(state => {
-            pickup_id.append(`<option value="${state.id}">${state.name}</option>`);
-          });
-        },
-        error: function (error) {
-          console.log(error);
-        }
-      });
-    } catch (error) {
-      console.log({ error });
-    }
-  }
-  $(() => {
-    getStatesByCountryID();
-  });
-  $(document).on('change', '#country_id', function () {
-    getStatesByCountryID();
-  });
-
   // previewTemplate: Updated Dropzone default previewTemplate
   // ! Don't change it unless you really know what you are doing
   const previewTemplate = `<div class="dz-preview dz-file-preview">

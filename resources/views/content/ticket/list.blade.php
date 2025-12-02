@@ -67,18 +67,29 @@
       <table id="ticketTable" class="table table-bordered custom-table-style">
         <thead>
           <tr>
+            <th>@lang('Sr.')</th>
+            <th>@lang('Database')</th>
             <th>@lang('Ticket No.')</th>
             <th>@lang('Contact')</th>
-            <th>@lang('Subject')</th>
             <th>@lang('Status')</th>
             <th>@lang('Created Date')</th>
             <th>@lang('Action')</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($data as $general)
+          @php
+            $i=0;
+          @endphp
+          @foreach ($data as $general) 
+          @php
+            $i++;
+          @endphp
           <tr>
-            <td data-id="{{ $general->id }}">
+            <td data-id="{{ $general->id }}">{{$i}}</td>
+            <td>
+              <spna class="badge bg-success">{{$general->db}}</spna>
+            </td>
+            <td>
               <spna class="badge bg-info">{{$general->ticket_no}}</spna>
             </td>
             <td>
@@ -86,21 +97,20 @@
               <a href="mailto:{{ $general->email }}" class="mb-1"><i class="fa fa-envelope"></i> {{ $general->email }}</a><br>
               <a href="tel:{{ $general->phone }}"><span class="badge bg-dark"><i class="fa fa-phone"></i> {{ $general->phone }}</span></a>
             </td>
-            <td>{{ $general->subject }}</td>
             <td>
                @php $st = Helper::getStatusById($general->status_id); @endphp
               <span class="badge d-block me-1" style="background-color: {{ $st->color }} !important;">
                   {{ $st->title }}
-              </span>
-            </td>
-            <td>{{ Helper::dateFormat($general->created_at) }}</td>
+              </span></td>
+              <td>
+              {{ Helper::dateFormat($general->created_at) }}</td>
             <td>
               <div class="d-flex justify-content-center">
-                <a href="{{ route('dashboard.tickets.edit', ['ticket' => $general->id]) }}"
+                {{-- <a href="{{ route('dashboard.tickets.edit', ['ticket' => $general->id]) }}"
                   class="cursor-pointer text-primary bx bx-edit editOperatingCountry">
-                </a>
+                </a> --}}
                 <a href="javascript:;"  class="cursor-pointer text-danger bx bx-trash-alt"
-                  onclick="deleteTicket(`{{$general->id}}`)">
+                  onclick="deleteTicket(`{{$general->db}}`,`{{$general->id}}`)">
                 </a>
               </div>
             </td>

@@ -73,30 +73,28 @@ class TicketController extends Controller
     $ticketNumber = strtoupper('BT-' . Str::random(8));
     $type = $request->type;
     $connection = array_key_exists($type, $this->tableNames) ?? null;
-
     if (!$connection) {
       return back()->withErrors(['type' => 'Invalid ticket type selected.']);
     }
 
     $data = [
-      'ticket_number' => $ticketNumber,
+      'ticket_no' => $ticketNumber,
       'name' => $request->name,
       'email' => $request->email,
       'phone' => $request->phone,
       'subject' => $request->subject,
       'message' => $request->content,
-      'status' => '1',
+      'status_id' => '1',
     ];
-
-
+    //dd($type);
     //dd($data);
     try {
       // Insert into the chosen DB
-      $ticket = DB::connection($connection)->table('tickets')->insert($data);
-      if ($ticket) {
+      $ticketId = DB::connection($type)->table('tickets')->insertGetId($data);
+      if ($ticketId) {
 
         return redirect()
-          ->route('dashboard.ticket.edit', $ticket['id'])
+          ->route('dashboard.tickets.edit', $ticketId)
           ->with('status', 'Ticket Successfully Created');
       }
     } catch (\Exception $e) {
@@ -172,10 +170,11 @@ class TicketController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Ticket $ticket)
+  public function destroy($id)
   {
-    $general = Ticket::where('id', $ticket->id)->update([
-      'status_id' => 3
-    ]);
+    dd($id);
+    $data = DB::table($db)
+      ->select('*')
+      ->where('id', $id)->update();
   }
 }

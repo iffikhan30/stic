@@ -115,10 +115,10 @@
               <div class="mb-3">
                 <label for="status_id" class="form-label">Status</label>
                 <select class="form-control" id="status_id" name="status_id" required>
-                  <option value="0">Progress</option>
-                  <option value="1">Open</option>
-                  <option value="2">Resolved</option>
-                  <option value="3">Closed</option>
+                  <option value="1">Progress</option>
+                  <option value="2">Open</option>
+                  <option value="3">Resolved</option>
+                  <option value="4">Closed</option>
                 </select>
               </div>
             </div>
