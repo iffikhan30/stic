@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Config;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class Helpers
@@ -201,5 +202,44 @@ class Helpers
         }
       }
     }
+  }
+
+  /**
+   * Open=1, In Progress=2, Resolved=3, Closed=4
+   */
+  public static function getStatusById($id=null)
+  {
+    $status = [
+      '1' => [
+        'title' => 'Open',
+        'color' => '#000', 
+      ],
+      '2' => [
+        'title' => 'Progress',
+        'color' => '#422222ff', 
+      ],
+      '3' => [
+        'title' => 'Resolved',
+        'color' => '#456f91ff', 
+      ],
+      '4' => [
+        'title' => 'Closed',
+        'color' => '#2b831aff', 
+      ],
+      '5' => [
+        'title' => 'Trash',
+        'color' => '#f00', 
+      ]
+    ];
+
+    return (object) ($status[$id] ?? [
+        'title' => 'Unknown',
+        'color' => '#999'
+    ]);
+  }
+
+  public static function dateFormat($date=null)
+  {
+    return $date ? Carbon::parse($date)->format('h:i A d/m/Y') : null;
   }
 }

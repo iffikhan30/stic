@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\pages\DashboardController;
 use App\Http\Controllers\pages\TicketController;
+use App\Http\Controllers\pages\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
+
+Route::get('/dashboard', function () {
   if (auth('admin')->check()) {
     // If admin is logged in, redirect to dashboard
     return redirect()->route('dashboard.index');

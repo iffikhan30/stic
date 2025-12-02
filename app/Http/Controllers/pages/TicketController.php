@@ -84,8 +84,7 @@ class TicketController extends Controller
       'email' => $request->email,
       'phone' => $request->phone,
       'subject' => $request->subject,
-      'content' => $request->content,
-      'type' => $type,
+      'message' => $request->content,
       'status' => '1',
     ];
 
@@ -116,10 +115,8 @@ class TicketController extends Controller
       ->select(
         'c.*',
         'u.name as username',
-        's.title as status_id'
       )
-      ->leftJoin('admins as u', 'u.id', '=', 'c.user_id')
-      ->leftJoin('statuses as s', 'c.status_id', '=', 's.id')
+      ->leftJoin('admins as u', 'u.id', '=', 'c.admin_id')
       ->where('c.id', $id)->first();
     return response()->json([
       'data' => $data,
@@ -154,7 +151,7 @@ class TicketController extends Controller
       'content' => $request->content,
       'menu_order' => $request->menu_order,
       'type' => $request->type,
-      'user_id' => Auth::user()->id,
+      'admin_id' => Auth::user()->id,
       'status_id' => $request->status_id,
     ];
     try {

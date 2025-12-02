@@ -1,5 +1,5 @@
 // Manucatuirer Table
-const cmsTable = $('#cmsTable').DataTable({
+const ticketTable = $('#ticketTable').DataTable({
   language: handleDataTableLanguage(),
   search: false,
   order: false,

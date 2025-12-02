@@ -19,10 +19,8 @@ return new class extends Migration
       $table->string('phone')->nullable();
       $table->string('subject');
       $table->text('message');
-      $table->string('type'); // e.g., Inquiry, Complaint, Feedback
-      $table->string('status_id')->default('1');  // e.g., Open=1, In Progress=0, Resolved=2, Closed=3
+      $table->string('status_id')->default('1');  // e.g., Open=1, In Progress=2, Resolved=3, Closed=4
       $table->integer('admin_id')->nullable(); // To track which admin is handling the ticket
-      $table->json('admin_notes')->nullable(); // To store notes added by admins
       $table->timestamps();
     });
   }

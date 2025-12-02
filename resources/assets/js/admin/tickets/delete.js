@@ -59,7 +59,7 @@ $(document).on('click', '.delete-image-record', function () {
   });
 });
 
-const deleteCms = id => {
+const deleteTicket = id => {
   Swal.fire({
     title: 'Are you sure?',
     text: "You won't be able to revert this!",
@@ -75,16 +75,16 @@ const deleteCms = id => {
     buttonsStyling: false
   }).then(async result => {
     if (result.isConfirmed) {
-      await deleteCmsRequest(id);
+      await deleteTicketRequest(id);
     }
   });
 };
 
 // delete request
-const deleteCmsRequest = async id => {
+const deleteTicketRequest = async id => {
   try {
     // Fetch request
-    const fetchUrl = `/dashboard/cms/${id}`;
+    const fetchUrl = `/dashboard/tickets/${id}`;
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     const fetchOptions = {

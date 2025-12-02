@@ -67,8 +67,9 @@
       <table id="ticketTable" class="table table-bordered custom-table-style">
         <thead>
           <tr>
-            <th>@lang('Title')</th>
-            <th>@lang('Slug')</th>
+            <th>@lang('Ticket No.')</th>
+            <th>@lang('Contact')</th>
+            <th>@lang('Subject')</th>
             <th>@lang('Status')</th>
             <th>@lang('Created Date')</th>
             <th>@lang('Action')</th>
@@ -78,31 +79,29 @@
           @foreach ($data as $general)
           <tr>
             <td data-id="{{ $general->id }}">
-              <spna class="badge bg-info">{{$general->lang_slug}}</spna>
-              {{ $general->title }}
+              <spna class="badge bg-info">{{$general->ticket_no}}</spna>
             </td>
-            <td>{{ $general->slug }}</td>
             <td>
-              <span class="badge d-block me-1" style="background-color: {!! Helper::getStatusById($general->status_id)->color !!} !important;">
-                {{ Helper::getStatusById($general->status_id)->title }}
+              <i class="fa fa-user"></i>  : {{ $general->name }}<br>
+              <a href="mailto:{{ $general->email }}" class="mb-1"><i class="fa fa-envelope"></i> {{ $general->email }}</a><br>
+              <a href="tel:{{ $general->phone }}"><span class="badge bg-dark"><i class="fa fa-phone"></i> {{ $general->phone }}</span></a>
+            </td>
+            <td>{{ $general->subject }}</td>
+            <td>
+               @php $st = Helper::getStatusById($general->status_id); @endphp
+              <span class="badge d-block me-1" style="background-color: {{ $st->color }} !important;">
+                  {{ $st->title }}
               </span>
             </td>
             <td>{{ Helper::dateFormat($general->created_at) }}</td>
             <td>
               <div class="d-flex justify-content-center">
-                @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin') || Auth::user()->can('edit-pages'))
                 <a href="{{ route('dashboard.tickets.edit', ['ticket' => $general->id]) }}"
                   class="cursor-pointer text-primary bx bx-edit editOperatingCountry">
                 </a>
-                @endif
-                <!-- <a href="javascript:;" class="cursor-pointer text-primary fa-regular fa-eye"
-                      onclick="viewTickets(`{{$general->id}}`)">
-                    </a> -->
-                @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin') || Auth::user()->can('delete-pages'))
-                <a href="javascript:;" class="cursor-pointer text-danger bx bx-trash-alt"
+                <a href="javascript:;"  class="cursor-pointer text-danger bx bx-trash-alt"
                   onclick="deleteTicket(`{{$general->id}}`)">
                 </a>
-                @endif
               </div>
             </td>
           </tr>
