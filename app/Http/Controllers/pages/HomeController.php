@@ -53,6 +53,8 @@ class HomeController extends Controller
       'subject' => $request->subject,
       'message' => $request->content,
       'status_id' => '1',
+      'created_at' => now(),
+      'updated_at' => now()
     ];
     try {
       // Insert into the chosen DB

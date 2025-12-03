@@ -26,7 +26,7 @@ Laravel support ticket system, the form insert the relevant database by customer
 ### How To run.
 
 - php artisan serve.
-- npm run watch [if you want watch your code].
+- npm run watch.
 - In case your port is busy change the command
 - php artisan serve --port 8002
 - update webpacke.mix.js.

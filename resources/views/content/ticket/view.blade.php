@@ -43,7 +43,7 @@
           @endif
         </div>
         <div class="d-flex align-content-center flex-wrap gap-2">
-          <button type="submit" class="btn btn-primary" name="status_id" value="1">Update</button>
+          <button type="submit" class="btn btn-primary" name="update">Update</button>
         </div>
       </div>
       <div class="row">
@@ -56,23 +56,23 @@
             </div>
             <div class="card-body">
               <div class="mb-3">
-                <p>{{$data->name}}</p>
+                <p><b>Name : </b>{{$data->name}}</p>
               </div>
 
               <div class="mb-3">
-                <p>{{$data->email}}</p>
+                <p><b>Email : </b>{{$data->email}}</p>
               </div>
 
               <div class="mb-3">
-                <p>{{$data->phone}}</p>
+                <p><b>Phone : </b>{{$data->phone}}</p>
               </div>
 
               <div class="mb-3">
-                <p>{{$data->name}}</p>
+                <p><b>Subject : </b>{{$data->subject}}</p>
               </div>
               <!-- Description -->
               <div class="mb-3">
-                <div>{{$data->message}}</div>
+                <div><b>Message : </b>{{$data->message}}</div>
               </div>
             </div>
           </div>
@@ -91,10 +91,10 @@
               <div class="mb-3">
                 <label for="status_id" class="form-label">Status</label>
                 <select class="form-control" id="status_id" name="status_id" required>
-                  <option value="1">Progress</option>
-                  <option value="2">Open</option>
-                  <option value="3">Resolved</option>
-                  <option value="4">Closed</option>
+                  <option value="1" {{$data->status_id == '1' ? 'selected="selected"' : '' }}>Progress</option>
+                  <option value="2" {{$data->status_id == '2' ? 'selected="selected"' : '' }}>Open</option>
+                  <option value="3" {{$data->status_id == '3' ? 'selected="selected"' : '' }}>Resolved</option>
+                  <option value="4" {{$data->status_id == '4' ? 'selected="selected"' : '' }}>Closed</option>
                 </select>
               </div>
             </div>

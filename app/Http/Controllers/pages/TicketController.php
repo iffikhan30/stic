@@ -122,7 +122,7 @@ class TicketController extends Controller
       if ($ticketId) {
 
         return redirect()
-          ->route('dashboard.tickets.edit', $ticketId)
+          ->route('dashboard.tickets.index')
           ->with('status', 'Ticket Successfully Created');
       }
     } catch (\Exception $e) {
@@ -165,7 +165,6 @@ class TicketController extends Controller
    */
   public function update(Request $request, $ticket)
   {
-    dd($ticket);
     $exc = explode('-', $ticket);
     $id = $exc[0];
     $db = $exc[1];
