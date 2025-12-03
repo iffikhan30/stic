@@ -34,22 +34,32 @@
         class="bx bx-plus me-0 me-sm-2"></i>@lang('Add Ticket')</a>
   </div>
   <div class="card-body pb-0">
-    <form class="dt_adv_search rentalcar-filter-form" id="dt_adv_search">
+    <form class="dt_adv_search general-filter-form" id="dt_adv_search">
+
+      {{-- department --}}
+      <select class="form-control form-select-sm" id="sType" name="sType">
+        <option value="">Select Department</option>
+        @foreach ($departments as $dKey => $department)
+        <option value="{{ $dKey }}" {{ old('sType') === $dKey ? 'selected' : '' }}>{{ $department }}</option>
+        @endforeach
+      </select>
 
       {{-- title --}}
-      <input type="text" name="sTitle" id="sTitle" class="form-control form-control-sm search-key"
-        placeholder="Search by Title" value="{{ old('sTitle', request('sTitle')) }}">
+      <input type="text" name="sEmail" id="sEmail" class="form-control form-control-sm search-key"
+        placeholder="Search by Email" value="{{ old('sEmail', request('sEmail')) }}">
 
-      {{-- id --}}
-      <input type="number" name="sId" id="sId" class="form-control form-control-sm search-key"
-        placeholder="Search by Id"
-        value="{{ old('sId', request('sId')) }}">
+      {{-- ticket no. --}}
+      <input type="text" name="sTicketno" id="sTicketno" class="form-control form-control-sm search-key"
+        placeholder="Search by BT-0000000"
+        value="{{ old('sTicketno', request('sTicketno')) }}">
 
       {{-- status --}}
       <select name="sStatus" id="sStatus" class="form-select form-select-sm">
         <option value="">Select Status</option>
-        <option value="1" {{ old('sStatus', request('sStatus')) == '1' ? 'Selected' : '' }}>Active</option>
-        <option value="2" {{ old('sStatus', request('sStatus')) == '2' ? 'Selected' : '' }}>Deactive</option>
+        <option value="1" {{ old('sStatus', request('sStatus')) == '1' ? 'Selected' : '' }}>Progress</option>
+        <option value="2" {{ old('sStatus', request('sStatus')) == '2' ? 'Selected' : '' }}>Open</option>
+        <option value="3" {{ old('sStatus', request('sStatus')) == '3' ? 'Selected' : '' }}>Resolved</option>
+        <option value="4" {{ old('sStatus', request('sStatus')) == '4' ? 'Selected' : '' }}>Closed</option>
         </option>
       </select>
 
@@ -78,11 +88,11 @@
         </thead>
         <tbody>
           @php
-            $i=0;
+          $i=0;
           @endphp
-          @foreach ($data as $general) 
+          @foreach ($data as $general)
           @php
-            $i++;
+          $i++;
           @endphp
           <tr>
             <td data-id="{{ $general->id }}">{{$i}}</td>
@@ -93,30 +103,34 @@
               <spna class="badge bg-info">{{$general->ticket_no}}</spna>
             </td>
             <td>
-              <i class="fa fa-user"></i>  : {{ $general->name }}<br>
+              <i class="fa fa-user"></i> : {{ $general->name }}<br>
               <a href="mailto:{{ $general->email }}" class="mb-1"><i class="fa fa-envelope"></i> {{ $general->email }}</a><br>
               <a href="tel:{{ $general->phone }}"><span class="badge bg-dark"><i class="fa fa-phone"></i> {{ $general->phone }}</span></a>
             </td>
             <td>
-               @php $st = Helper::getStatusById($general->status_id); @endphp
+              @php $st = Helper::getStatusById($general->status_id); @endphp
               <span class="badge d-block me-1" style="background-color: {{ $st->color }} !important;">
-                  {{ $st->title }}
-              </span></td>
-              <td>
-              {{ Helper::dateFormat($general->created_at) }}</td>
+                {{ $st->title }}
+              </span>
+            </td>
+            <td>
+              {{ Helper::dateFormat($general->created_at) }}
+            </td>
             <td>
               <div class="d-flex justify-content-center">
-                {{-- <a href="{{ route('dashboard.tickets.edit', ['ticket' => $general->id]) }}"
-                  class="cursor-pointer text-primary bx bx-edit editOperatingCountry">
-                </a> --}}
-                <a href="javascript:;"  class="cursor-pointer text-danger bx bx-trash-alt"
+                <!-- <a href="{{ route('dashboard.tickets.edit', ['ticket' => $general->id]) }}"
+                class="cursor-pointer text-primary bx bx-edit">
+                </a>
+                <a href="javascript:;" class="cursor-pointer text-danger bx bx-trash-alt"
                   onclick="deleteTicket(`{{$general->db}}`,`{{$general->id}}`)">
+                </a>-->
+                <a href="{{ route('dashboard.tickets.show', ['ticket' => $general->id.'-'.$general->db]) }}"
+                  class="cursor-pointer text-primary"><i class="fa fa-eye"></i>
                 </a>
               </div>
             </td>
           </tr>
           @endforeach
-
         </tbody>
       </table>
     </div>

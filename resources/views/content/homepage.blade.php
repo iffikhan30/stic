@@ -9,6 +9,9 @@ $customizerHidden = 'customizer-hide';
 
 @section('vendor-style')
 <!-- Vendor -->
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/katex.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/editor.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
 @endsection
 
@@ -18,13 +21,12 @@ $customizerHidden = 'customizer-hide';
 @endsection
 
 @section('vendor-script')
-<script src="{{asset('assets/vendor/libs/@form-validation/umd/bundle/popular.min.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/quill/katex.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/quill/quill.js')}}"></script>
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/pages-auth.js')}}"></script>
+<script src="{{ asset('assets/js/admin/tickets/add.js') }}"></script>
 @endsection
 
 @section('content')
@@ -58,47 +60,49 @@ $customizerHidden = 'customizer-hide';
           </div>
           @endif
 
-          <form id="formAuthentication" class="mb-3" action="{{ route('admin.login') }}" method="POST">
+          <form id="createTicketForm" class="mb-3" action="{{ route('home.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input name="name" class="form-control" value="{{ old('name') }}" required>
-              </div>
+              <label class="form-label">Name</label>
+              <input name="name" class="form-control" value="{{ old('name') }}" required>
+            </div>
 
-              <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input name="email" class="form-control" value="{{ old('email') }}" required>
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Phone</label>
-                <input name="phone" class="form-control" value="{{ old('phone') }}">
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Subject</label>
-                <input name="subject" class="form-control" value="{{ old('subject') }}" required>
-              </div>
-              <!-- Description -->
-              <div class="mb-3">
-                <label class="form-label">Description</label>
-                <div class="form-control p-0">
-                  <div class="content border-0 pb-4" id="content">
-                  </div>
-                  <textarea name="content" class="hidden hide" style="display: none;"></textarea>
-                </div>
-              </div>
             <div class="mb-3">
-              <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+              <label class="form-label">Email</label>
+              <input name="email" class="form-control" value="{{ old('email') }}" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input name="phone" class="form-control" value="{{ old('phone') }}" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <input name="subject" class="form-control" value="{{ old('subject') }}" required>
+            </div>
+            <!-- Description -->
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <div class="form-control p-0">
+                <div class="content border-0 pb-4" id="content">
+                </div>
+                <textarea name="content" class="hidden hide" style="display: none;"></textarea>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="type" class="form-label">Ticket Type</label>
+              <select class="form-control" id="type" name="type" required>
+                <option value="">Select Department</option>
+                @foreach ($departments as $dKey => $department)
+                <option value="{{ $dKey }}" {{ old('type') === $dKey ? 'selected' : '' }}>{{ $department }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="mb-3">
+              <button class="btn btn-primary d-grid w-100" type="submit">Submit</button>
             </div>
           </form>
-          {{-- <p class="text-center">
-            <span>New on our platform?</span>
-            <a href="{{url('admin/register')}}">
-              <span>Create an account</span>
-            </a>
-          </p>--}}
-
         </div>
       </div>
       <!-- /Register -->
