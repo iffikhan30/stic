@@ -1,6 +1,6 @@
 * {
   .flatpickr-calendar svg {
-      margin-top: 0.4rem !important;
+    margin-top: 0.4rem !important;
   }
   #DataTables_Table_0_wrapper .row.mx-2 {
     margin: 0px !important;
@@ -159,8 +159,9 @@
       }
     }
   }
-  .country-column-hide tr > th:nth-child(3), .country-column-hide tr > td:nth-child(3) {
-      // display: none;
+  .country-column-hide tr > th:nth-child(3),
+  .country-column-hide tr > td:nth-child(3) {
+    // display: none;
   }
   .general-country-filter-form {
     display: grid;
@@ -220,7 +221,7 @@
 
   .general-filter-form {
     display: grid;
-    grid-template: 'sOc sTitle sStatus buttonContainer';
+    grid-template: 'sType sEmail sTicketno sStatus buttonContainer';
     gap: 6px;
 
     padding: 10px;
@@ -237,28 +238,38 @@
 
     @media (max-width: 992px) {
       grid-template:
-        'sOc sTitle'
+        'sType sEmail sTicketno'
         'sStatus buttonContainer';
     }
 
     @media (max-width: 768px) {
       grid-template:
-        'sOc sTitle'
+        'sType sEmail sTicketno'
         'sStatus'
         'buttonContainer buttonContainer buttonContainer';
     }
 
     @media (max-width: 576px) {
       grid-template:
-        'sOc'
-        'sTitle'
+        'sType'
+        'sEmail'
+        'sTicketno'
         'sStatus'
         'buttonContainer';
     }
 
-    #sTitle {
-      grid-area: sTitle;
+    #sType {
+      grid-area: sType;
     }
+
+    #sEmail {
+      grid-area: sEmail;
+    }
+
+    #sTicketno {
+      grid-area: sTicketno;
+    }
+
     #sStatus {
       grid-area: sStatus;
     }

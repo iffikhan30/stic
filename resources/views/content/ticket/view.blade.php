@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'CMS')
+@section('title', 'Edit Ticket')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/dropzone/dropzone.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/tagify/tagify.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
 @endsection
 @section('vendor-script')
 <script src="{{asset('assets/vendor/libs/quill/katex.js')}}"></script>
@@ -19,29 +20,22 @@
 <script src="{{asset('assets/vendor/libs/jquery-repeater/jquery-repeater.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/tagify/tagify.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 @endsection
 
 @section('page-script')
-<script src="{{ asset('assets/js/admin/tickets/add.js') }}"></script>
+<script src="{{ asset('assets/js/admin/tickets/edit.js') }}"></script>
+<script src="{{ asset('assets/js/admin/tickets/delete.js') }}"></script>
 @endsection
 
 @section('content')
 <div class="card">
   <div class="card-body">
-    <form id="createTicketForm" action="{{ route('dashboard.tickets.store') }}" enctype="multipart/form-data" method="POST">
+    <form id="createCmsForm" action="{{ route('dashboard.tickets.update', ['ticket' => $data->id.'-'.$db]) }}" method="POST" enctype="multipart/form-data">
       @csrf
+      @method('PUT')
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
         <div class="d-flex flex-column justify-content-center">
-          <h4 class="mb-1 mt-3">Add a New Ticket</h4>
-          @if ($errors->any())
-          <div class="alert alert-danger">
-            <ul>
-              @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-          @endif
           @if (session('status'))
           <div class="mb-1 text-success">
             {{ session('status') }}
@@ -49,7 +43,7 @@
           @endif
         </div>
         <div class="d-flex align-content-center flex-wrap gap-2">
-          <button type="submit" class="btn btn-primary" name="status_id" value="1">Publish</button>
+          <button type="submit" class="btn btn-primary" name="status_id" value="1">Update</button>
         </div>
       </div>
       <div class="row">
@@ -62,32 +56,23 @@
             </div>
             <div class="card-body">
               <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input name="name" class="form-control" value="{{ old('name') }}" required>
+                <p>{{$data->name}}</p>
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input name="email" class="form-control" value="{{ old('email') }}" required>
+                <p>{{$data->email}}</p>
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Phone</label>
-                <input name="phone" class="form-control" value="{{ old('phone') }}">
+                <p>{{$data->phone}}</p>
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Subject</label>
-                <input name="subject" class="form-control" value="{{ old('subject') }}" required>
+                <p>{{$data->name}}</p>
               </div>
               <!-- Description -->
-              <div>
-                <label class="form-label">Description</label>
-                <div class="form-control p-0">
-                  <div class="content border-0 pb-4" id="content">
-                  </div>
-                  <textarea name="content" class="hidden hide" style="display: none;"></textarea>
-                </div>
+              <div class="mb-3">
+                <div>{{$data->message}}</div>
               </div>
             </div>
           </div>
@@ -103,15 +88,6 @@
               <h5 class="card-title mb-0">Capabilities</h5>
             </div>
             <div class="card-body">
-              <div class="mb-3">
-                <label for="type" class="form-label">Ticket Type</label>
-                <select class="form-control" id="type" name="type" required>
-                  <option value="">Select Department</option>
-                  @foreach ($departments as $dKey => $department)
-                  <option value="{{ $dKey }}" {{ old('type') === $dKey ? 'selected' : '' }}>{{ $department }}</option>
-                  @endforeach
-                </select>
-              </div>
               <div class="mb-3">
                 <label for="status_id" class="form-label">Status</label>
                 <select class="form-control" id="status_id" name="status_id" required>

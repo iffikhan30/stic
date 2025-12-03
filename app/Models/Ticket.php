@@ -16,9 +16,7 @@ class Ticket extends Model
     'phone',
     'subject',
     'message',
-    'type',
     'status_id',
     'admin_id',
-    'admin_notes',
   ];
 }

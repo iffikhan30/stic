@@ -30,6 +30,9 @@
       <!-- Menu wrapper: End -->
       <!-- Toolbar: Start -->
       <ul class="navbar-nav flex-row align-items-center ms-auto">
+        <li class="nav-item">
+          <a class="nav-link fw-medium active" aria-current="page" href="/">Home</a>
+        </li>
         @if($configData['hasCustomizer'] == true)
         <!-- Style Switcher -->
         <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
@@ -58,9 +61,9 @@
         @endif
 
         <!-- navbar button: Start -->
-        <li>
+        {{-- <li>
           <a href="javascript:;" class="btn btn-primary" target="_blank"><span class="tf-icons bx bx-user me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
-        </li>
+        </li> --}}
         <!-- navbar button: End -->
       </ul>
       <!-- Toolbar: End -->

@@ -26,20 +26,48 @@ class TicketController extends Controller
    */
   public function index(Request $request)
   {
+    $departments = $this->tableNames;
+
     $tickets = collect();
 
     foreach ($this->tableNames as $connectionName => $label) {
-      $rows = DB::connection($connectionName)->table('tickets')->get()->map(function ($r) use ($connectionName) {
+      $query = DB::connection($connectionName)
+        ->table('tickets');
+
+      // --- APPLY SEARCH FILTERS ---
+      if ($request->sType) {
+        // Only load tickets from a single department/db
+        if ($request->sType !== $connectionName) {
+          continue;
+        }
+      }
+
+      if ($request->sEmail) {
+        $query->where('email', 'LIKE', '%' . $request->sEmail . '%');
+      }
+
+      if ($request->sTicketno) {
+        $query->where('ticket_no', 'LIKE', '%' . $request->sTicketno . '%');
+      }
+
+      if ($request->sStatus) {
+        $query->where('status_id', '=', $request->sStatus);
+      }
+
+      // Fetch rows from this database
+      $rows = $query->get()->map(function ($r) use ($connectionName) {
         $r->db = $connectionName;
         return $r;
       });
 
       $tickets = $tickets->concat($rows);
     }
+
     $data = $tickets->sortByDesc('created_at')->values();
     return view(
       'content.ticket.list',
       [
+        'departments' => $departments,
         'data' => $data,
       ]
     );
@@ -73,31 +101,28 @@ class TicketController extends Controller
     $ticketNumber = strtoupper('BT-' . Str::random(8));
     $type = $request->type;
     $connection = array_key_exists($type, $this->tableNames) ?? null;
-
     if (!$connection) {
       return back()->withErrors(['type' => 'Invalid ticket type selected.']);
     }
 
     $data = [
-      'ticket_number' => $ticketNumber,
+      'ticket_no' => $ticketNumber,
       'name' => $request->name,
       'email' => $request->email,
       'phone' => $request->phone,
       'subject' => $request->subject,
-      'content' => $request->content,
-      'type' => $type,
-      'status' => '1',
+      'message' => $request->content,
+      'status_id' => $request->status_id,
     ];
-
-
+    //dd($type);
     //dd($data);
     try {
       // Insert into the chosen DB
-      $ticket = DB::connection($connection)->table('tickets')->insert($data);
-      if ($ticket) {
+      $ticketId = DB::connection($type)->table('tickets')->insertGetId($data);
+      if ($ticketId) {
 
         return redirect()
-          ->route('dashboard.ticket.edit', $ticket['id'])
+          ->route('dashboard.tickets.edit', $ticketId)
           ->with('status', 'Ticket Successfully Created');
       }
     } catch (\Exception $e) {
@@ -112,18 +137,15 @@ class TicketController extends Controller
    */
   public function show($id)
   {
-    $data = DB::table($this->tableName . ' as c')
-      ->select(
-        'c.*',
-        'u.name as username',
-        's.title as status_id'
-      )
-      ->leftJoin('admins as u', 'u.id', '=', 'c.user_id')
-      ->leftJoin('statuses as s', 'c.status_id', '=', 's.id')
-      ->where('c.id', $id)->first();
-    return response()->json([
-      'data' => $data,
-    ], 200);
+    $exc = explode('-', $id);
+    $id = $exc[0];
+    $db = $exc[1];
+    $data = DB::connection($db)
+      ->table('tickets')->where('id', $id)->first();
+    return view('content.ticket.view', [
+      'data'  => $data,
+      'db' => $db
+    ]);
   }
 
   /**
@@ -143,24 +165,17 @@ class TicketController extends Controller
    */
   public function update(Request $request, $ticket)
   {
-
-    $request->validate([
-      'title' => 'required',
-    ]);
+    dd($ticket);
+    $exc = explode('-', $ticket);
+    $id = $exc[0];
+    $db = $exc[1];
     $data = [
-      'title' => $request->title,
-      'subtitle' => $request->subtitle,
-      'slug' => $request->slug,
-      'content' => $request->content,
-      'menu_order' => $request->menu_order,
-      'type' => $request->type,
-      'user_id' => Auth::user()->id,
       'status_id' => $request->status_id,
     ];
     try {
-      $response = Ticket::where('id', $ticket)->update($data);
+      $response = DB::connection($db)
+        ->table('tickets')->where('id', $id)->update($data);
       if ($response) {
-
         return redirect()
           ->back()
           ->with('status', 'Successfully Updated');
@@ -175,10 +190,11 @@ class TicketController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Ticket $ticket)
+  public function destroy($id)
   {
-    $general = Ticket::where('id', $ticket->id)->update([
-      'status_id' => 3
-    ]);
+    dd($id);
+    $data = DB::table($db)
+      ->select('*')
+      ->where('id', $id)->update();
   }
 }
